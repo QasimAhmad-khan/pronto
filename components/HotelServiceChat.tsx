@@ -164,8 +164,16 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
     </div>
     <div className="service-chat-bottom">
       <details className="phone-pairing"><summary>Connect a separate phone <span aria-hidden="true">↗</span></summary>
-        <div className="phone-pairing-content"><p>Install the <a href="https://ntfy.sh" target="_blank" rel="noopener noreferrer">ntfy app</a> on your phone and allow notifications. Scan with your phone camera to open the topic, or enter the topic below in ntfy.</p>
-          {topic && <><div className="phone-pairing-code"><QRCodeSVG value={`ntfy://ntfy.sh/${topic}?display=Pronto`} size={112} /><code>{topic}</code></div><button type="button" onClick={markPhonePaired}>{phonePaired ? "Phone subscribed ✓" : "I've subscribed on my phone"}</button><button type="button" onClick={() => void publishPhoneNotice("Pronto test alert — your phone is connected to the demo.")} disabled={!phonePaired}>Send test alert</button></>}
+        <div className="phone-pairing-content">
+          <p>Open the <a href="https://docs.ntfy.sh/subscribe/phone/" target="_blank" rel="noopener noreferrer">ntfy app</a> on your phone and allow notifications. Tap <strong>+</strong>, enter the topic below, and tap <strong>Subscribe</strong>. Keep the default server, <strong>ntfy.sh</strong>.</p>
+          {topic && <>
+            <div className="phone-pairing-code">
+              <QRCodeSVG value={`https://ntfy.sh/${topic}`} size={120} marginSize={4} title="Open this topic in your phone browser" />
+              <div><code>{topic}</code><small>The QR code opens the topic in your browser.</small></div>
+            </div>
+            <button type="button" onClick={markPhonePaired}>{phonePaired ? "Phone subscribed ✓" : "I've subscribed on my phone"}</button>
+            <button type="button" onClick={() => void publishPhoneNotice("Pronto test alert — your phone is connected to the demo.")} disabled={!phonePaired}>Send test alert</button>
+          </>}
           <small>Demo content uses a public ntfy topic. Anyone with this code can read or publish to it; do not use real guest details.</small></div>
       </details>
       {notice && <div className="service-notice" role="status"><strong>Demo notification</strong><p>{notice}</p><button type="button" onClick={() => void publishPhoneNotice(notice)} disabled={!phonePaired}>Send to paired phone ↗</button></div>}

@@ -17,7 +17,7 @@ Pronto uses [ntfy](https://ntfy.sh/) for this demo, so a request made on a lapto
 
 1. On the laptop, open a hotel and expand **Connect a separate phone** in its chat.
 2. Install the ntfy Android or iOS app on the phone and allow its notifications.
-3. Scan the pairing QR code with the phone camera to open ntfy, or subscribe in ntfy to the topic shown on the laptop.
+3. In the ntfy app, tap **+**, enter the topic shown on the laptop, and tap **Subscribe**. Keep the default server, **ntfy.sh**. Scanning the QR code opens the topic in the phone's browser.
 4. Click **I've subscribed on my phone** and **Send test alert**. Confirm the test appears in the phone's notification center.
 5. Ask for fresh towels or finish a demo booking request on the laptop. Pronto publishes that demo alert to the paired topic.
 
