@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Pronto — Stay somewhere remarkable",
-  description: "A considered way to discover stays across Pakistan. Explore the Pronto hotel booking demo.",
+  title: "Pronto — Your stay, at your fingertips",
+  description: "Explore three hotel guides and try Pronto's hotel-specific service center demo.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

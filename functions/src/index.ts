@@ -27,7 +27,7 @@ export const sendBookingNotification = onRequest(
     try {
       const client = twilio(accountSid.value(), authToken.value());
       await client.messages.create({
-        body: "Pronto Booking: Your Executive Suite at Serena Hotel Islamabad is confirmed. We look forward to hosting you!",
+        body: `Pronto demo: You requested a ${request.body.room} at ${request.body.hotel}. This is not a confirmed reservation.`,
         from: twilioPhoneNumber.value(),
         to: request.body.phoneNumber,
       });

@@ -1,164 +1,68 @@
 [
   {
-    "id": "h1",
-    "name": "Serena Hotel",
-    "location": "Islamabad",
-    "area": "Islamabad",
-    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=85",
-    "rooms": ["Executive Suite", "Deluxe Room"],
-    "price": "Rs. 45,000/night"
-  },
-  {
-    "id": "h2",
-    "name": "Pearl Continental (PC)",
-    "location": "Lahore",
-    "area": "Lahore",
-    "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1800&q=85",
-    "rooms": ["Presidential Suite", "Standard Room"],
-    "price": "Rs. 38,000/night"
-  },
-  {
-    "id": "h3",
-    "name": "The Nishat Hotel",
-    "location": "Johar Town, Lahore",
-    "area": "Lahore",
-    "image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1800&q=85",
-    "rooms": ["Royal Suite", "Club Room"],
-    "price": "Rs. 32,000/night"
-  },
-  {
-    "id": "h4",
-    "name": "Karachi Marriott Hotel",
-    "location": "Karachi",
-    "area": "Karachi",
-    "image": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h5",
-    "name": "Pearl-Continental Karachi",
-    "location": "Karachi",
-    "area": "Karachi",
-    "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h6",
-    "name": "Avari Towers Karachi",
-    "location": "Karachi",
-    "area": "Karachi",
-    "image": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h7",
+    "id": "marriott",
+    "slug": "islamabad-marriott",
     "name": "Islamabad Marriott Hotel",
+    "serviceName": "Marriott Service Center",
     "location": "Islamabad",
-    "area": "Islamabad",
-    "image": "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
+    "address": "Aga Khan Road, F-5, Islamabad",
+    "description": "An Islamabad landmark near the Margalla Hills, with an indoor pool, dining choices and rooms for city stays.",
+    "image": "https://cache.marriott.com/is/image/marriotts7prod/mc-isbpk-islamabad-marriott-h33236-73715:Wide-Hor?wid=1336&fit=constrain",
+    "gallery": [
+      { "src": "https://cache.marriott.com/is/image/marriotts7prod/mc-isbpk-deluxe-king--27910:Wide-Hor?wid=1336&fit=constrain", "alt": "Deluxe King room at Islamabad Marriott Hotel" },
+      { "src": "https://cache.marriott.com/is/image/marriotts7prod/mc-isbpk-nadia-38956:Wide-Hor?wid=1336&fit=constrain", "alt": "Nadia dining at Islamabad Marriott Hotel" }
+    ],
+    "rooms": ["Deluxe King", "Executive King", "Executive Suite", "Royal Suite"],
+    "breakfast": "Complimentary breakfast is listed from 6:30 AM to 10:30 AM daily.",
+    "pool": "The hotel lists an indoor pool. Demo pool hours: 7:00 AM–10:00 PM.",
+    "womenPool": "Demo women-only pool slot: 10:00 AM–12:00 PM. Confirm the current schedule with the hotel.",
+    "menPool": "Demo men-only pool slot: 12:00 PM–2:00 PM. Confirm the current schedule with the hotel.",
+    "checkInOut": "Check-in is 2:00 PM and check-out is 12:00 PM.",
+    "source": "https://www.marriott.com/en-us/hotels/isbpk-islamabad-marriott-hotel/overview/",
+    "photosSource": "https://www.marriott.com/en-us/hotels/isbpk-islamabad-marriott-hotel/photos/"
   },
   {
-    "id": "h8",
-    "name": "Avari Hotel Lahore",
+    "id": "serena",
+    "slug": "islamabad-serena",
+    "name": "Islamabad Serena Hotel",
+    "serviceName": "Serena Service Center",
+    "location": "Islamabad",
+    "address": "Khayaban-e-Suhrawardy, Islamabad",
+    "description": "A garden-set stay drawing on Pakistani craft and heritage, with Maisha Spa, a rooftop pool and Zamana dining.",
+    "image": "https://image-tc.galaxy.tf/wijpeg-eugyxtxg4ges46jpxs6ay8hgo/landscaped-gardens.jpg?width=1400",
+    "gallery": [
+      { "src": "https://image-tc.galaxy.tf/wijpeg-ctrkkhd6aw21t7hdly23905kv/executive-rooms_square.jpg?crop=269%2C0%2C1063%2C1063&width=800", "alt": "Executive room at Islamabad Serena Hotel" },
+      { "src": "https://image-tc.galaxy.tf/wijpeg-9n5wgkgzsk6n92kj7xq557ml0/maisha-pool.jpg?width=1400", "alt": "Maisha pool at Islamabad Serena Hotel" }
+    ],
+    "rooms": ["Deluxe Room", "Executive Room", "Junior Suite", "Executive Suite"],
+    "breakfast": "Breakfast is served at Zamana. The restaurant lists opening from 6:30 AM; confirm the breakfast service end time with the hotel.",
+    "pool": "The hotel lists a rooftop pool. Demo pool hours: 7:00 AM–10:00 PM.",
+    "womenPool": "Demo women-only pool slot: 9:00 AM–11:00 AM. Confirm the current schedule with the hotel.",
+    "menPool": "Demo men-only pool slot: 11:00 AM–1:00 PM. Confirm the current schedule with the hotel.",
+    "checkInOut": "Please confirm current check-in and check-out times with the hotel.",
+    "source": "https://www.serenahotels.com/islamabad/",
+    "photosSource": "https://www.serenahotels.com/islamabad/"
+  },
+  {
+    "id": "pc",
+    "slug": "pearl-continental-lahore",
+    "name": "Pearl-Continental Hotel Lahore",
+    "serviceName": "PC Lahore Service Center",
     "location": "Lahore",
-    "area": "Lahore",
-    "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h9",
-    "name": "Pearl-Continental Bhurban",
-    "location": "Bhurban, Murree",
-    "area": "Northern Pakistan",
-    "image": "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h10",
-    "name": "Pearl-Continental Rawalpindi",
-    "location": "Rawalpindi",
-    "area": "Other cities",
-    "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h11",
-    "name": "Pearl-Continental Muzaffarabad",
-    "location": "Muzaffarabad, AJK",
-    "area": "Northern Pakistan",
-    "image": "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h12",
-    "name": "Peshawar Serena Hotel",
-    "location": "Peshawar",
-    "area": "Other cities",
-    "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h13",
-    "name": "Quetta Serena Hotel",
-    "location": "Quetta",
-    "area": "Other cities",
-    "image": "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h14",
-    "name": "Faisalabad Serena Hotel",
-    "location": "Faisalabad",
-    "area": "Other cities",
-    "image": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h15",
-    "name": "Gilgit Serena Hotel",
-    "location": "Gilgit",
-    "area": "Northern Pakistan",
-    "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h16",
-    "name": "Hunza Serena Hotel",
-    "location": "Hunza",
-    "area": "Northern Pakistan",
-    "image": "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h17",
-    "name": "Pearl-Continental Attabad Lake",
-    "location": "Attabad Lake, Hunza",
-    "area": "Northern Pakistan",
-    "image": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
-  },
-  {
-    "id": "h18",
-    "name": "Rumanza by Pearl-Continental",
-    "location": "Multan",
-    "area": "Other cities",
-    "image": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=82",
-    "rooms": ["Rooms & suites"],
-    "price": "Rates on request"
+    "address": "Shahrah-e-Quaid-e-Azam, The Mall, Lahore",
+    "description": "A classic Lahore address on The Mall with a temperature-controlled outdoor pool, Marco Polo breakfast and a range of suites.",
+    "image": "https://www.pchotels.com/storage/media/2026/Aug/TvVYG7uHciMPFWJpwdUzx12mWHlakVCU5lAT2UIF.png",
+    "gallery": [
+      { "src": "https://www.pchotels.com/storage/media/2026/Aug/2A12YUJVctveN0qZsNiWHdK3d4HCjeKuGO2Wjojh.jpg", "alt": "Deluxe King room at Pearl-Continental Lahore" },
+      { "src": "https://www.pchotels.com/storage/media/2026/Aug/1wYVszXeLq4XuIN4gbtDEiaWUI8b3zDUNmpOZi1b.jpg", "alt": "Pool at Pearl-Continental Lahore" }
+    ],
+    "rooms": ["Standard King", "Deluxe King", "Executive King", "Business Suite"],
+    "breakfast": "Breakfast is served at Marco Polo. Demo breakfast start time: 7:00 AM; confirm current service hours with the hotel.",
+    "pool": "The hotel lists a temperature-controlled outdoor pool. Demo pool hours: 7:00 AM–10:00 PM.",
+    "womenPool": "Demo women-only pool slot: 8:00 AM–10:00 AM. Confirm the current schedule with the hotel.",
+    "menPool": "Demo men-only pool slot: 10:00 AM–12:00 PM. Confirm the current schedule with the hotel.",
+    "checkInOut": "Please confirm current check-in and check-out times with the hotel.",
+    "source": "https://pchotels.com/public/hotel-and-resort/pearl-continental-hotel-lahore",
+    "photosSource": "https://pchotels.com/public/hotel-and-resort/pearl-continental-hotel-lahore"
   }
 ]

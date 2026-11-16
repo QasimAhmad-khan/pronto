@@ -1,24 +1,28 @@
 # Pronto
 
-A Next.js hotel booking demo with a guided chat and a Firebase Cloud Function that sends a real Twilio SMS.
+A three-hotel, blue-and-white booking service demo for Islamabad Marriott, Islamabad Serena, and Pearl-Continental Lahore. Each hotel has an individual guide and an embedded, hotel-specific service chat. The images are served from the hotels' official sites; their source links appear on each guide.
 
-## Local setup
+## Run locally
 
-1. Run `npm install` and `npm install --prefix functions`.
-2. Run `npm run dev` to view the frontend. Local development defaults to a clearly labeled notification preview: it shows an in-page confirmation, and can request a device alert from a supported secure browser. It does not send SMS or create a reservation. For SMS testing, create a Firebase project, copy `.firebaserc.example` to `.firebaserc`, and replace `YOUR_PROJECT_ID`. Install the Firebase CLI with `npm install -g firebase-tools`, then run `firebase login`.
-3. Set the Firebase secrets: `firebase functions:secrets:set TWILIO_ACCOUNT_SID`, `firebase functions:secrets:set TWILIO_AUTH_TOKEN`, and `firebase functions:secrets:set TWILIO_PHONE_NUMBER`.
-4. Start the Functions emulator with `firebase emulators:start --only functions`. Copy `.env.example` to `.env.local`, replace the project ID in the emulator URL, then restart the Next.js dev server. For emulator-only testing, set secret values in `functions/.secret.local` as described in Firebase's emulator documentation.
+```sh
+npm install
+npm run dev
+```
 
-## Deploy
+The chat answers the questions in [DEMO_QUESTIONS.md](DEMO_QUESTIONS.md) and walks through a booking *request* preview. By default, it shows an in-page notification. It can also request a browser device alert on a supported HTTPS browser. Neither notification creates a reservation or sends an SMS.
 
-### Vercel demo
+## Deploy to Vercel
 
-Import this repository into Vercel with the root directory set to the repository root and the Framework Preset set to Next.js. Leave Build Command and Output Directory at their defaults; Vercel detects the static export automatically. Vercel runs `npm run build`; no environment variables are required for the notification demo. The site defaults to demo mode when no booking API URL is configured, so it never presents an unsent SMS as a real confirmation.
+Import this repository with the **Next.js** framework preset and the repository root as the root directory. Use the default build command and **leave the Output Directory override empty**. `next.config.ts` exports the three hotel pages as static files. No environment variables are needed for the default demo.
 
-### Firebase Hosting and live SMS
+## Optional Firebase and Twilio SMS demo
 
-Run `npm run build`, `npm run build --prefix functions`, then `firebase deploy --only hosting,functions`. Firebase Hosting serves the static Next.js export from `out` and rewrites `/api/send-booking` to `sendBookingNotification`. Build with `NEXT_PUBLIC_DEMO_MODE=false` to enable that live endpoint. The function requires a Blaze plan and valid Twilio credentials. The catalog and conversation are demo content; a successful SMS request is required before the live UI shows confirmation.
+The Firebase function accepts a Pakistani mobile number, one of the three featured hotel names, and one of that hotel's featured rooms. It sends a clearly labeled demo request summary, not a reservation confirmation.
 
-For a phone demo, open the site on that phone. The in-page confirmation works without browser notification permission. A browser device alert requires a supported browser and HTTPS; it appears on the device viewing the site. Sending an automatic SMS to another phone requires the configured Twilio function.
+1. Install function dependencies with `npm install --prefix functions`.
+2. Create a Firebase project, copy `.firebaserc.example` to `.firebaserc`, and set its project ID.
+3. Set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_PHONE_NUMBER` with `firebase functions:secrets:set`.
+4. Build with `npm run build` and `npm run build --prefix functions`, then deploy with `firebase deploy --only hosting,functions`.
+5. Set `NEXT_PUBLIC_DEMO_MODE=false` at frontend build time. Firebase Hosting rewrites `/api/send-booking` to the function. For a separately hosted frontend, also set `NEXT_PUBLIC_BOOKING_API_URL` to the function URL and allow that frontend origin in the function's CORS settings.
 
-The SMS endpoint is public and can incur Twilio charges. Add abuse protection such as Firebase App Check and rate limiting before exposing it beyond a controlled demo.
+The public SMS endpoint can incur Twilio charges. Add rate limiting or other abuse protection before opening it beyond a controlled demo.
