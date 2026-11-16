@@ -11,7 +11,7 @@ export const sendBookingNotification = onRequest(
   {
     region: "us-central1",
     secrets: [accountSid, authToken, twilioPhoneNumber],
-    cors: [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/],
+    cors: [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/, "https://pronto-blush.vercel.app"],
   },
   async (request, response) => {
     if (request.method !== "POST") {

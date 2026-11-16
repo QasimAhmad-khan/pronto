@@ -103,9 +103,6 @@ em { font-style:normal; font-family:Georgia,serif; font-weight:400; }
 .room-tile span { font-size:10px; color:#6d8dc5; letter-spacing:.16em; font-weight:700; }
 .room-tile h3 { font-size:23px; letter-spacing:-.05em; font-weight:600; margin:18px 0 8px; }
 .room-tile p { font-size:12px; line-height:1.5; color:#7081a0; margin:0; }
-.info-list > div { border-top:1px solid var(--line); display:grid; grid-template-columns:160px 1fr; gap:20px; padding:17px 0; }
-.info-list strong { font-size:13px; }
-.info-list p { font-size:13px; line-height:1.55; color:#607395; margin:0; }
 .source-note { font-size:11px!important; color:#7385a8!important; margin-top:27px; }
 .source-note a { text-decoration:underline; }
 .detail-chat-column { position:sticky; top:22px; }
@@ -128,10 +125,6 @@ em { font-style:normal; font-family:Georgia,serif; font-weight:400; }
 .service-typing span:nth-child(2) { animation-delay:.2s; }.service-typing span:nth-child(3) { animation-delay:.4s; }
 @keyframes typing { to { opacity:.25; transform:translateY(-3px); } }
 .service-chat-bottom { border-top:1px solid var(--line); padding:15px 16px 12px; }
-.quick-questions { display:flex; flex-wrap:wrap; gap:7px; padding-bottom:12px; }
-.quick-questions::-webkit-scrollbar { display:none; }
-.quick-questions button { border:1px solid #bfd1f0; border-radius:100px; padding:8px 11px; background:#f4f8ff; color:#2854aa; white-space:nowrap; font-size:11px; }
-.quick-questions button:hover { background:#dfeafe; }
 .chat-input-line { display:flex; align-items:center; gap:7px; }
 .chat-input-line input { min-width:0; flex:1; border:1px solid #d2dff4; border-radius:100px; outline:none; padding:11px 14px; font-size:12px; color:var(--ink); background:#fff; height:42px; }
 .chat-input-line input:focus { border-color:var(--blue); box-shadow:0 0 0 2px #1854cf21; }
@@ -163,7 +156,7 @@ em { font-style:normal; font-family:Georgia,serif; font-weight:400; }
   .landing-hero { min-height:0; }.hero-layout { padding:55px 5% 40px; }.hero-words h1 { font-size:clamp(55px,12vw,72px); margin:27px 0 20px; }.hero-intro { font-size:14px; }.hero-index { margin-top:55px; }.hero-photo-composition { height:360px; }.hero-main-photo { width:78%; height:88%; }.hero-side-photo { width:48%; height:48%; }.hero-bottom-bar { margin:0 5%; }
   .hotels-section { padding:75px 5% 95px; }.section-topline span:last-child { display:none; }.hotels-heading { margin:38px 0; }.hotels-heading h2 { font-size:59px; }.hotel-cards { grid-template-columns:1fr; gap:34px; }.preview-image { height:380px; }.preview-meta h3 { font-size:31px; }
   .requests-section { padding:75px 5% 25px; }.requests-layout { margin:35px 0 90px; }.requests-layout h2 { font-size:clamp(50px,11vw,70px); }.requests-layout p { font-size:16px; }.requests-rule { flex-wrap:wrap; row-gap:15px; }.site-footer { padding:50px 5%; display:block; }.site-footer p { margin:23px 0 15px; }
-  .detail-shell { padding:29px 5% 85px; }.back-link { margin-bottom:35px; }.detail-intro h1 { font-size:clamp(51px,11vw,72px); }.detail-hero-image { height:390px; }.detail-gallery img { height:160px; }.guide-section { padding-top:55px; }.guide-facts { grid-template-columns:1fr; gap:8px; }.guide-facts > div { min-height:85px; }.room-grid { grid-template-columns:1fr; }.info-list > div { grid-template-columns:1fr; gap:7px; }.detail-footer { padding:35px 5%; flex-wrap:wrap; }.detail-footer span { display:none; }
+  .detail-shell { padding:29px 5% 85px; }.back-link { margin-bottom:35px; }.detail-intro h1 { font-size:clamp(51px,11vw,72px); }.detail-hero-image { height:390px; }.detail-gallery img { height:160px; }.guide-section { padding-top:55px; }.guide-facts { grid-template-columns:1fr; gap:8px; }.guide-facts > div { min-height:85px; }.room-grid { grid-template-columns:1fr; }.detail-footer { padding:35px 5%; flex-wrap:wrap; }.detail-footer span { display:none; }
   .service-chat { min-height:620px; height:680px; }
 }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*:before,*:after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }

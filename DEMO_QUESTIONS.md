@@ -1,6 +1,6 @@
 # Pronto demo questions
 
-Open one of the three hotels from the landing page. The service center on that hotel's guide answers with hotel-specific hardcoded content. These exact prompts are available as buttons and also work when typed:
+Open one of the three hotels from the landing page and type a question into that hotel's service center. The chat has no suggested-question buttons. These prompts and related wording work:
 
 1. **What are the pool hours?**
 2. **What is the women's pool time?**
@@ -9,9 +9,12 @@ Open one of the three hotels from the landing page. The service center on that h
 5. **When does breakfast start?**
 6. **What are check-in and check-out times?**
 7. **I need to book a room.**
+8. **I need fresh towels in my room.** The bot replies: `Request #3561 'fresh towels' has been made for Room #113!` and labels it as a demo request. It also shows an in-page notification, with an optional alert on the device viewing the site.
+
+The scripted women's pool answer is **3:00 PM to 6:00 PM on weekdays**. The scripted breakfast answer is **8:00 AM to 11:00 AM**, including the reminder that late diners aren't entertained and an invitation to ask about breakfast options. The scripted check-in answer is **10:00 AM**, with check-out **before noon**. These are demo answers for all three hotels, not verified policies.
 
 The booking request flow then asks for a featured room, check-in date, number of nights (1–14), guest name, and Pakistani mobile number (`+923001234567` format). It ends with a visible demo notification and an optional browser device alert. The default Vercel demo does not create a reservation or send an SMS.
 
-The bot recognizes related wording for pool, swimming, women/female, men/male, rooms/suites, breakfast, check-in/out, and book/reserve. Other questions receive a prompt showing its supported topics.
+The bot recognizes related wording for pool, swimming, women/female, men/male, rooms/suites, breakfast, check-in/out, towels, and book/reserve. Other questions receive a prompt showing its supported topics.
 
-**Data note:** Published details and photos link to official hotel pages. Pool hours, gender-specific pool slots, and any breakfast time marked **demo** are illustrative values, not verified hotel policies. Confirm current schedules with the hotel.
+**Data note:** Published photos link to official hotel pages. All service answers and request numbers in this demo are scripted; confirm real schedules and requests with the hotel.

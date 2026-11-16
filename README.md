@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-The chat answers the questions in [DEMO_QUESTIONS.md](DEMO_QUESTIONS.md) and walks through a booking *request* preview. By default, it shows an in-page notification. It can also request a browser device alert on a supported HTTPS browser. Neither notification creates a reservation or sends an SMS.
+The chat answers typed questions in [DEMO_QUESTIONS.md](DEMO_QUESTIONS.md), simulates a room-service request, and walks through a booking *request* preview. By default, it shows an in-page notification. The **Show as device alert** button can display that specific request on the phone viewing the HTTPS site, after the user grants notification permission. On iPhone, add the site to the Home Screen before requesting an alert. Neither notification creates a hotel request or reservation, or sends an SMS to another phone.
 
 ## Deploy to Vercel
 
@@ -23,6 +23,6 @@ The Firebase function accepts a Pakistani mobile number, one of the three featur
 2. Create a Firebase project, copy `.firebaserc.example` to `.firebaserc`, and set its project ID.
 3. Set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_PHONE_NUMBER` with `firebase functions:secrets:set`.
 4. Build with `npm run build` and `npm run build --prefix functions`, then deploy with `firebase deploy --only hosting,functions`.
-5. Set `NEXT_PUBLIC_DEMO_MODE=false` at frontend build time. Firebase Hosting rewrites `/api/send-booking` to the function. For a separately hosted frontend, also set `NEXT_PUBLIC_BOOKING_API_URL` to the function URL and allow that frontend origin in the function's CORS settings.
+5. Set `NEXT_PUBLIC_DEMO_MODE=false` at frontend build time. Firebase Hosting rewrites `/api/send-booking` to the function. For the Vercel frontend, also set `NEXT_PUBLIC_BOOKING_API_URL` to the deployed function URL. The current Vercel production origin is allowed in the function's CORS settings.
 
 The public SMS endpoint can incur Twilio charges. Add rate limiting or other abuse protection before opening it beyond a controlled demo.

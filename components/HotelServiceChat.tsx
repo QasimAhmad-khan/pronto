@@ -12,31 +12,25 @@ const demoMode = process.env.NEXT_PUBLIC_DEMO_MODE === "true" || (process.env.NE
 const phonePattern = /^\+923\d{9}$/;
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const quickQuestions = [
-  { label: "Pool hours", prompt: "What are the pool hours?" },
-  { label: "Women's pool time", prompt: "What is the women's pool time?" },
-  { label: "Men's pool time", prompt: "What is the men's pool time?" },
-  { label: "Room types", prompt: "What room types are available?" },
-  { label: "Breakfast", prompt: "When does breakfast start?" },
-  { label: "Check-in / out", prompt: "What are check-in and check-out times?" },
-  { label: "Book a room", prompt: "I need to book a room." },
-];
+const towelResponse = "Request #3561 'fresh towels' has been made for Room #113! Demo only — no request was sent to the hotel.";
+const isTowelRequest = (text: string) => /\btowels?\b/i.test(text);
 
 function serviceAnswer(question: string, hotel: Hotel) {
   const text = question.toLowerCase();
+  if (isTowelRequest(text)) return towelResponse;
   if (/(women|woman|female|ladies|lady)/.test(text) && /(pool|swim)/.test(text)) return hotel.womenPool;
   if (/(men|man|male|gents)/.test(text) && /(pool|swim)/.test(text)) return hotel.menPool;
   if (/(pool|swim)/.test(text)) return hotel.pool;
   if (/(room|suite|accommodation)/.test(text)) return `The featured room types are ${hotel.rooms.join(", ")}. I can prepare a demo booking request for any of these.`;
   if (/(breakfast|morning meal)/.test(text)) return hotel.breakfast;
   if (/(check.?in|check.?out|arrival|departure)/.test(text)) return hotel.checkInOut;
-  return "I can help with pool times, women's and men's pool slots, rooms, breakfast, check-in, and a demo booking request. Choose a question below or ask in your own words.";
+  return "I can help with pool times, women's and men's pool slots, rooms, breakfast, check-in, fresh towels, and a demo booking request. Ask in your own words.";
 }
 
 export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
   const [stage, setStage] = useState<Stage>("questions");
   const [messages, setMessages] = useState<Message[]>([
-    { id: 1, sender: "hotel", text: `Welcome to the ${hotel.serviceName}. What can I assist you with? Ask about your stay or start a demo booking request.` },
+    { id: 1, sender: "hotel", text: `Welcome to the ${hotel.serviceName}. What can I assist you with? Ask about your stay, make a demo request, or book a room.` },
   ]);
   const [booking, setBooking] = useState<Booking>({ room: "", date: "", nights: "", name: "" });
   const [draft, setDraft] = useState("");
@@ -66,7 +60,18 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
   function showDeviceNotice(text: string) {
     setNotice(text);
     if (typeof Notification !== "undefined" && Notification.permission === "granted") {
-      try { new Notification(`${hotel.name} · Pronto demo`, { body: text }); } catch { /* In-page notice remains visible. */ }
+      void sendDeviceAlert(text).catch(() => { /* In-page notice remains visible. */ });
+    }
+  }
+
+  async function sendDeviceAlert(text: string) {
+    const title = `${hotel.name} · Pronto demo`;
+    if ("serviceWorker" in navigator) {
+      await navigator.serviceWorker.register("/notification-sw.js");
+      const registration = await navigator.serviceWorker.ready;
+      await registration.showNotification(title, { body: text, icon: "/brand/pronto-logo.jpg", data: { url: window.location.pathname } });
+    } else {
+      new Notification(title, { body: text });
     }
   }
 
@@ -78,7 +83,7 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
     try {
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
-        new Notification(`${hotel.name} · Pronto demo`, { body: notice });
+        await sendDeviceAlert(notice);
         setDeviceAlertStatus("Device alerts enabled on this browser.");
       } else {
         setDeviceAlertStatus("Device alerts were not enabled. The in-page notice is available here.");
@@ -93,7 +98,7 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
     if (!value || busy || stage === "processing" || stage === "done") return;
     setError("");
     if (stage === "room" && !hotel.rooms.some((room) => room.toLowerCase() === value.toLowerCase())) {
-      setError("Choose one of the room types shown below.");
+      setError(`Enter one of these room types: ${hotel.rooms.join(", ")}.`);
       return;
     }
     if (stage === "date") {
@@ -113,9 +118,10 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
 
     if (stage === "questions") {
       if (/(book|reserve|reservation)/i.test(value)) {
-        await answer(`Certainly. Which room would you like at ${hotel.name}? Choose one of the options below.`, "room");
+        await answer(`Certainly. Which room would you like at ${hotel.name}? Type one of these: ${hotel.rooms.join(", ")}.`, "room");
       } else {
         await answer(serviceAnswer(value, hotel), "questions");
+        if (isTowelRequest(value)) showDeviceNotice(towelResponse);
       }
     } else if (stage === "room") {
       const room = hotel.rooms.find((item) => item.toLowerCase() === value.toLowerCase())!;
@@ -165,7 +171,7 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
   }
 
   return <div className="service-chat" aria-label={`${hotel.serviceName} chat`}>
-    <div className="service-chat-header"><div className="service-status"><span /> {hotel.serviceName.toUpperCase()}</div><h2>How can we help?</h2><p>Hotel-specific answers and a guided booking demo.</p></div>
+    <div className="service-chat-header"><div className="service-status"><span /> {hotel.serviceName.toUpperCase()}</div><h2>How can we help?</h2><p>Type a question or request in your own words. Answers are scripted for this demo.</p></div>
     <div className="service-chat-body" role="log" aria-live="polite" ref={bodyRef}>
       <div className="chat-day">TODAY · PRONTO SERVICE</div>
       {messages.map((message) => <div key={message.id} className={`service-message service-message-${message.sender}`}>{message.text}</div>)}
@@ -173,9 +179,6 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
     </div>
     <div className="service-chat-bottom">
       {notice && <div className="service-notice" role="status"><strong>Demo notification</strong><p>{notice}</p><button type="button" onClick={enableDeviceAlert}>Show as device alert ↗</button>{deviceAlertStatus && <small>{deviceAlertStatus}</small>}</div>}
-      {!busy && stage === "questions" && <div className="quick-questions">{quickQuestions.map((question) => <button type="button" key={question.label} onClick={() => void send(question.prompt)}>{question.label}</button>)}</div>}
-      {!busy && stage === "room" && <div className="quick-questions">{hotel.rooms.map((room) => <button type="button" key={room} onClick={() => void send(room)}>{room}</button>)}</div>}
-      {!busy && stage === "nights" && <div className="quick-questions">{["1", "2", "3"].map((nights) => <button type="button" key={nights} onClick={() => void send(nights)}>{nights} night{nights === "1" ? "" : "s"}</button>)}</div>}
       {stage === "done" ? <button className="chat-restart" onClick={() => { setStage("questions"); setNotice(""); addMessage("hotel", "What else can I help you with?"); }}>Ask another question ↗</button> : <form onSubmit={submit}>
         {error && <p className="form-error" role="alert">{error}</p>}
         <div className="chat-input-line"><input ref={inputRef} type={stage === "date" ? "date" : stage === "nights" ? "number" : stage === "phone" ? "tel" : "text"} min={stage === "nights" ? "1" : undefined} max={stage === "nights" ? "14" : undefined} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={stage === "phone" ? "+923001234567" : stage === "name" ? "Your name" : stage === "nights" ? "Number of nights" : stage === "date" ? undefined : stage === "room" ? "Choose a room..." : "Ask about this hotel..."} aria-label={stage === "date" ? "Check-in date" : stage === "phone" ? "Pakistani mobile number" : "Message"} disabled={busy} /><button type="submit" disabled={busy || !draft.trim()} aria-label="Send message">↑</button></div>
