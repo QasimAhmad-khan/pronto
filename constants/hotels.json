@@ -1,0 +1,164 @@
+[
+  {
+    "id": "h1",
+    "name": "Serena Hotel",
+    "location": "Islamabad",
+    "area": "Islamabad",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=85",
+    "rooms": ["Executive Suite", "Deluxe Room"],
+    "price": "Rs. 45,000/night"
+  },
+  {
+    "id": "h2",
+    "name": "Pearl Continental (PC)",
+    "location": "Lahore",
+    "area": "Lahore",
+    "image": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1800&q=85",
+    "rooms": ["Presidential Suite", "Standard Room"],
+    "price": "Rs. 38,000/night"
+  },
+  {
+    "id": "h3",
+    "name": "The Nishat Hotel",
+    "location": "Johar Town, Lahore",
+    "area": "Lahore",
+    "image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1800&q=85",
+    "rooms": ["Royal Suite", "Club Room"],
+    "price": "Rs. 32,000/night"
+  },
+  {
+    "id": "h4",
+    "name": "Karachi Marriott Hotel",
+    "location": "Karachi",
+    "area": "Karachi",
+    "image": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h5",
+    "name": "Pearl-Continental Karachi",
+    "location": "Karachi",
+    "area": "Karachi",
+    "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h6",
+    "name": "Avari Towers Karachi",
+    "location": "Karachi",
+    "area": "Karachi",
+    "image": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h7",
+    "name": "Islamabad Marriott Hotel",
+    "location": "Islamabad",
+    "area": "Islamabad",
+    "image": "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h8",
+    "name": "Avari Hotel Lahore",
+    "location": "Lahore",
+    "area": "Lahore",
+    "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h9",
+    "name": "Pearl-Continental Bhurban",
+    "location": "Bhurban, Murree",
+    "area": "Northern Pakistan",
+    "image": "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h10",
+    "name": "Pearl-Continental Rawalpindi",
+    "location": "Rawalpindi",
+    "area": "Other cities",
+    "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h11",
+    "name": "Pearl-Continental Muzaffarabad",
+    "location": "Muzaffarabad, AJK",
+    "area": "Northern Pakistan",
+    "image": "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h12",
+    "name": "Peshawar Serena Hotel",
+    "location": "Peshawar",
+    "area": "Other cities",
+    "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h13",
+    "name": "Quetta Serena Hotel",
+    "location": "Quetta",
+    "area": "Other cities",
+    "image": "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h14",
+    "name": "Faisalabad Serena Hotel",
+    "location": "Faisalabad",
+    "area": "Other cities",
+    "image": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h15",
+    "name": "Gilgit Serena Hotel",
+    "location": "Gilgit",
+    "area": "Northern Pakistan",
+    "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h16",
+    "name": "Hunza Serena Hotel",
+    "location": "Hunza",
+    "area": "Northern Pakistan",
+    "image": "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h17",
+    "name": "Pearl-Continental Attabad Lake",
+    "location": "Attabad Lake, Hunza",
+    "area": "Northern Pakistan",
+    "image": "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  },
+  {
+    "id": "h18",
+    "name": "Rumanza by Pearl-Continental",
+    "location": "Multan",
+    "area": "Other cities",
+    "image": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=82",
+    "rooms": ["Rooms & suites"],
+    "price": "Rates on request"
+  }
+]

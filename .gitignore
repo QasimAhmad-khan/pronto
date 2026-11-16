@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+.env*
+!.env.example
+functions/node_modules/
+functions/lib/
+functions/.secret.local
+firebase-debug.log
+.vercel/
+.firebaserc
