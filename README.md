@@ -1,6 +1,6 @@
 # Pronto
 
-A three-hotel, blue-and-white booking service demo for Islamabad Marriott, Islamabad Serena, and Pearl-Continental Lahore. Each hotel has an individual guide and an embedded, hotel-specific service chat. The images are served from the hotels' official sites; their source links appear on each guide.
+A three-hotel service demo for Islamabad Marriott, Islamabad Serena, and Pearl-Continental Lahore. Each hotel has its own guide and scripted service chat.
 
 ## Run locally
 
@@ -9,20 +9,22 @@ npm install
 npm run dev
 ```
 
-The chat answers typed questions in [DEMO_QUESTIONS.md](DEMO_QUESTIONS.md), simulates a room-service request, and walks through a booking *request* preview. By default, it shows an in-page notification. The **Show as device alert** button can display that specific request on the phone viewing the HTTPS site, after the user grants notification permission. On iPhone, add the site to the Home Screen before requesting an alert. Neither notification creates a hotel request or reservation, or sends an SMS to another phone.
+The supported questions and request flow are in [DEMO_QUESTIONS.md](DEMO_QUESTIONS.md). Hotel requests and reservations are simulated.
+
+## Notifications on a separate phone
+
+Pronto uses [ntfy](https://ntfy.sh/) for this demo, so a request made on a laptop can appear in a separate phone's notification center. There is no SMS or phone-number step.
+
+1. On the laptop, open a hotel and expand **Connect a separate phone** in its chat.
+2. Install the ntfy Android or iOS app on the phone and allow its notifications.
+3. Scan the pairing QR code with the phone camera to open ntfy, or subscribe in ntfy to the topic shown on the laptop.
+4. Click **I've subscribed on my phone** and **Send test alert**. Confirm the test appears in the phone's notification center.
+5. Ask for fresh towels or finish a demo booking request on the laptop. Pronto publishes that demo alert to the paired topic.
+
+The topic is generated randomly and stored in the laptop browser. ntfy topics are public: anyone with the topic name can read or publish to it. Pronto sends only scripted demo details, without the guest name or a phone number. Do not use this public service for real guest requests. A successful publish means ntfy accepted the alert; delivery also depends on the phone's subscription, connection, and notification settings.
 
 ## Deploy to Vercel
 
-Import this repository with the **Next.js** framework preset and the repository root as the root directory. Use the default build command and **leave the Output Directory override empty**. `next.config.ts` exports the three hotel pages as static files. No environment variables are needed for the default demo.
+Import this repository with the **Next.js** preset, the repository root as root directory, the default build command, and no Output Directory override. `next.config.ts` exports the pages as static files. No environment variables are required.
 
-## Optional Firebase and Twilio SMS demo
-
-The Firebase function accepts a Pakistani mobile number, one of the three featured hotel names, and one of that hotel's featured rooms. It sends a clearly labeled demo request summary, not a reservation confirmation.
-
-1. Install function dependencies with `npm install --prefix functions`.
-2. Create a Firebase project, copy `.firebaserc.example` to `.firebaserc`, and set its project ID.
-3. Set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_PHONE_NUMBER` with `firebase functions:secrets:set`.
-4. Build with `npm run build` and `npm run build --prefix functions`, then deploy with `firebase deploy --only hosting,functions`.
-5. Set `NEXT_PUBLIC_DEMO_MODE=false` at frontend build time. Firebase Hosting rewrites `/api/send-booking` to the function. For the Vercel frontend, also set `NEXT_PUBLIC_BOOKING_API_URL` to the deployed function URL. The current Vercel production origin is allowed in the function's CORS settings.
-
-The public SMS endpoint can incur Twilio charges. Add rate limiting or other abuse protection before opening it beyond a controlled demo.
+The old Firebase/Twilio function remains in `functions/` for reference, but the current frontend does not call or deploy it. The phone notification demo sends no SMS.

@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 import hotels from "@/constants/hotels.json";
 
 type Hotel = (typeof hotels)[number];
-type Stage = "questions" | "room" | "date" | "nights" | "name" | "phone" | "processing" | "done";
+type Stage = "questions" | "room" | "date" | "nights" | "name" | "processing" | "done";
 type Message = { id: number; sender: "guest" | "hotel"; text: string };
-type Booking = { room: string; date: string; nights: string; name: string };
+type Booking = { room: string; date: string; nights: string };
 
-const demoMode = process.env.NEXT_PUBLIC_DEMO_MODE === "true" || (process.env.NEXT_PUBLIC_DEMO_MODE !== "false" && !process.env.NEXT_PUBLIC_BOOKING_API_URL);
-const phonePattern = /^\+923\d{9}$/;
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const topicKey = "pronto-phone-topic";
+const pairedKey = "pronto-phone-paired";
+const newTopic = () => `pronto-${Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => byte.toString(16).padStart(2, "0")).join("")}`;
 
 const towelResponse = "Request #3561 'fresh towels' has been made for Room #113! Demo only — no request was sent to the hotel.";
 const isTowelRequest = (text: string) => /\btowels?\b/i.test(text);
@@ -32,18 +34,27 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
   const [messages, setMessages] = useState<Message[]>([
     { id: 1, sender: "hotel", text: `Welcome to the ${hotel.serviceName}. What can I assist you with? Ask about your stay, make a demo request, or book a room.` },
   ]);
-  const [booking, setBooking] = useState<Booking>({ room: "", date: "", nights: "", name: "" });
+  const [booking, setBooking] = useState<Booking>({ room: "", date: "", nights: "" });
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
-  const [deviceAlertStatus, setDeviceAlertStatus] = useState("");
+  const [topic, setTopic] = useState("");
+  const [phonePaired, setPhonePaired] = useState(false);
+  const [phoneStatus, setPhoneStatus] = useState("");
   const nextId = useRef(1);
   const bodyRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => { if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight; }, [messages, busy]);
   useEffect(() => { if (!busy && stage !== "done") inputRef.current?.focus(); }, [busy, stage]);
+  useEffect(() => {
+    const saved = localStorage.getItem(topicKey);
+    const value = saved && /^pronto-[a-f0-9]{32}$/.test(saved) ? saved : newTopic();
+    localStorage.setItem(topicKey, value);
+    setTopic(value);
+    setPhonePaired(localStorage.getItem(pairedKey) === "true");
+  }, []);
 
   function addMessage(sender: Message["sender"], text: string) {
     setMessages((current) => [...current, { id: ++nextId.current, sender, text }]);
@@ -57,40 +68,35 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
     setBusy(false);
   }
 
-  function showDeviceNotice(text: string) {
+  function showNotice(text: string) {
     setNotice(text);
-    if (typeof Notification !== "undefined" && Notification.permission === "granted") {
-      void sendDeviceAlert(text).catch(() => { /* In-page notice remains visible. */ });
-    }
+    if (phonePaired) void publishPhoneNotice(text);
+    else setPhoneStatus("Connect your phone above to receive this alert in its notification center.");
   }
 
-  async function sendDeviceAlert(text: string) {
-    const title = `${hotel.name} · Pronto demo`;
-    if ("serviceWorker" in navigator) {
-      await navigator.serviceWorker.register("/notification-sw.js");
-      const registration = await navigator.serviceWorker.ready;
-      await registration.showNotification(title, { body: text, icon: "/brand/pronto-logo.jpg", data: { url: window.location.pathname } });
-    } else {
-      new Notification(title, { body: text });
-    }
-  }
-
-  async function enableDeviceAlert() {
-    if (typeof Notification === "undefined" || !window.isSecureContext) {
-      setDeviceAlertStatus("Device alerts need a supported secure browser. The in-page notice is available here.");
+  async function publishPhoneNotice(text: string) {
+    if (!topic || !phonePaired) {
+      setPhoneStatus("Subscribe on your phone, then mark it paired before sending an alert.");
       return;
     }
+    setPhoneStatus("Sending to your phone topic…");
     try {
-      const permission = await Notification.requestPermission();
-      if (permission === "granted") {
-        await sendDeviceAlert(notice);
-        setDeviceAlertStatus("Device alerts enabled on this browser.");
-      } else {
-        setDeviceAlertStatus("Device alerts were not enabled. The in-page notice is available here.");
-      }
+      const response = await fetch(`https://ntfy.sh/${topic}`, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain", Title: `Pronto - ${hotel.name}` },
+        body: text,
+      });
+      if (!response.ok) throw new Error("Publish failed");
+      setPhoneStatus("Sent to your ntfy topic. Check the paired phone's notification center.");
     } catch {
-      setDeviceAlertStatus("This browser cannot show device alerts. The in-page notice is available here.");
+      setPhoneStatus("Could not send the phone alert. Check the connection and try again.");
     }
+  }
+
+  function markPhonePaired() {
+    localStorage.setItem(pairedKey, "true");
+    setPhonePaired(true);
+    setPhoneStatus("Phone marked as paired. Send a test alert to confirm it arrives.");
   }
 
   async function send(raw: string) {
@@ -111,7 +117,6 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
       return;
     }
     if (stage === "name" && value.length < 2) { setError("Enter your guest name."); return; }
-    if (stage === "phone" && !phonePattern.test(value)) { setError("Use the format +923001234567."); return; }
 
     setDraft("");
     addMessage("guest", value);
@@ -121,7 +126,7 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
         await answer(`Certainly. Which room would you like at ${hotel.name}? Type one of these: ${hotel.rooms.join(", ")}.`, "room");
       } else {
         await answer(serviceAnswer(value, hotel), "questions");
-        if (isTowelRequest(value)) showDeviceNotice(towelResponse);
+        if (isTowelRequest(value)) showNotice(towelResponse);
       }
     } else if (stage === "room") {
       const room = hotel.rooms.find((item) => item.toLowerCase() === value.toLowerCase())!;
@@ -134,33 +139,13 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
       setBooking((current) => ({ ...current, nights: value }));
       await answer("What name should I put on your demo request?", "name");
     } else if (stage === "name") {
-      setBooking((current) => ({ ...current, name: value }));
-      await answer("Lastly, enter a Pakistani mobile number in the format +923001234567.", "phone");
-    } else if (stage === "phone") {
       setBusy(true);
       setStage("processing");
       const summary = `${booking.room} at ${hotel.name} for ${booking.nights} night${booking.nights === "1" ? "" : "s"} from ${booking.date}.`;
-      if (demoMode) {
-        await delay(1100);
-        addMessage("hotel", `Your demo booking request is ready, ${booking.name}. ${summary} This is a preview; no reservation or SMS was sent.`);
-        showDeviceNotice(`${summary} Preview only — no reservation or SMS was sent.`);
-        setStage("done");
-      } else {
-        try {
-          const response = await fetch(process.env.NEXT_PUBLIC_BOOKING_API_URL || "/api/send-booking", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ phoneNumber: value, hotel: hotel.name, room: booking.room }),
-          });
-          if (!response.ok) throw new Error("Notification failed");
-          addMessage("hotel", `A demo request summary for ${summary} was sent by SMS. This is not a confirmed reservation.`);
-          showDeviceNotice(`${summary} Demo request summary sent by SMS; reservation not confirmed.`);
-          setStage("done");
-        } catch {
-          addMessage("hotel", "I could not send the SMS. Your request has not been confirmed. Please check the number and try again.");
-          setStage("phone");
-        }
-      }
+      await delay(1100);
+      addMessage("hotel", `Your demo booking request is ready, ${value}. ${summary} This is a preview; no reservation was made.`);
+      showNotice(`${summary} Demo preview only — no reservation was made.`);
+      setStage("done");
       setBusy(false);
     }
   }
@@ -178,12 +163,18 @@ export default function HotelServiceChat({ hotel }: { hotel: Hotel }) {
       {busy && <div className="service-typing" aria-label="Service center is typing"><span /><span /><span /></div>}
     </div>
     <div className="service-chat-bottom">
-      {notice && <div className="service-notice" role="status"><strong>Demo notification</strong><p>{notice}</p><button type="button" onClick={enableDeviceAlert}>Show as device alert ↗</button>{deviceAlertStatus && <small>{deviceAlertStatus}</small>}</div>}
+      <details className="phone-pairing"><summary>Connect a separate phone <span aria-hidden="true">↗</span></summary>
+        <div className="phone-pairing-content"><p>Install the <a href="https://ntfy.sh" target="_blank" rel="noopener noreferrer">ntfy app</a> on your phone and allow notifications. Scan with your phone camera to open the topic, or enter the topic below in ntfy.</p>
+          {topic && <><div className="phone-pairing-code"><QRCodeSVG value={`ntfy://ntfy.sh/${topic}?display=Pronto`} size={112} /><code>{topic}</code></div><button type="button" onClick={markPhonePaired}>{phonePaired ? "Phone subscribed ✓" : "I've subscribed on my phone"}</button><button type="button" onClick={() => void publishPhoneNotice("Pronto test alert — your phone is connected to the demo.")} disabled={!phonePaired}>Send test alert</button></>}
+          <small>Demo content uses a public ntfy topic. Anyone with this code can read or publish to it; do not use real guest details.</small></div>
+      </details>
+      {notice && <div className="service-notice" role="status"><strong>Demo notification</strong><p>{notice}</p><button type="button" onClick={() => void publishPhoneNotice(notice)} disabled={!phonePaired}>Send to paired phone ↗</button></div>}
+      {phoneStatus && <p className="phone-status" role="status">{phoneStatus}</p>}
       {stage === "done" ? <button className="chat-restart" onClick={() => { setStage("questions"); setNotice(""); addMessage("hotel", "What else can I help you with?"); }}>Ask another question ↗</button> : <form onSubmit={submit}>
         {error && <p className="form-error" role="alert">{error}</p>}
-        <div className="chat-input-line"><input ref={inputRef} type={stage === "date" ? "date" : stage === "nights" ? "number" : stage === "phone" ? "tel" : "text"} min={stage === "nights" ? "1" : undefined} max={stage === "nights" ? "14" : undefined} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={stage === "phone" ? "+923001234567" : stage === "name" ? "Your name" : stage === "nights" ? "Number of nights" : stage === "date" ? undefined : stage === "room" ? "Choose a room..." : "Ask about this hotel..."} aria-label={stage === "date" ? "Check-in date" : stage === "phone" ? "Pakistani mobile number" : "Message"} disabled={busy} /><button type="submit" disabled={busy || !draft.trim()} aria-label="Send message">↑</button></div>
+        <div className="chat-input-line"><input ref={inputRef} type={stage === "date" ? "date" : stage === "nights" ? "number" : "text"} min={stage === "nights" ? "1" : undefined} max={stage === "nights" ? "14" : undefined} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={stage === "name" ? "Your name" : stage === "nights" ? "Number of nights" : stage === "date" ? undefined : stage === "room" ? "Choose a room..." : "Ask about this hotel..."} aria-label={stage === "date" ? "Check-in date" : "Message"} disabled={busy} /><button type="submit" disabled={busy || !draft.trim()} aria-label="Send message">↑</button></div>
       </form>}
-      <p className="chat-footnote">{demoMode ? "Demo only · No booking or SMS is created" : "SMS summary only · Hotel booking is not confirmed"}</p>
+      <p className="chat-footnote">Demo only · No hotel request or reservation is created</p>
     </div>
   </div>;
 }
