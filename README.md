@@ -13,7 +13,7 @@ A Next.js hotel booking demo with a guided chat and a Firebase Cloud Function th
 
 ### Vercel demo
 
-Import this repository into Vercel with the root directory set to the repository root. The included `vercel.json` selects Next.js and the static `out` output. Vercel runs `npm run build`; no environment variables are required for the notification demo. The site defaults to demo mode when no booking API URL is configured, so it never presents an unsent SMS as a real confirmation.
+Import this repository into Vercel with the root directory set to the repository root and the Framework Preset set to Next.js. Leave Build Command and Output Directory at their defaults; Vercel detects the static export automatically. Vercel runs `npm run build`; no environment variables are required for the notification demo. The site defaults to demo mode when no booking API URL is configured, so it never presents an unsent SMS as a real confirmation.
 
 ### Firebase Hosting and live SMS
 
