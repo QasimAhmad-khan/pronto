@@ -21,6 +21,8 @@ Pronto uses [ntfy](https://ntfy.sh/) for this demo, so a request made on a lapto
 4. Click **I've subscribed on my phone** and **Send test alert**. Confirm the test appears in the phone's notification center.
 5. Ask for fresh towels or finish a demo booking request on the laptop. Pronto publishes that demo alert to the paired topic.
 
+If you already subscribed on another browser or site address, paste the topic or its ntfy.sh link into **Use existing topic**. Use **Send to phone** to send a request you entered before saving the topic.
+
 The topic is generated randomly and stored in the laptop browser. ntfy topics are public: anyone with the topic name can read or publish to it. Pronto sends only scripted demo details, without the guest name or a phone number. Do not use this public service for real guest requests. A successful publish means ntfy accepted the alert; delivery also depends on the phone's subscription, connection, and notification settings.
 
 ## Deploy to Vercel

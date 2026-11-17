@@ -13,11 +13,11 @@
       { "src": "https://cache.marriott.com/is/image/marriotts7prod/mc-isbpk-nadia-38956:Wide-Hor?wid=1336&fit=constrain", "alt": "Nadia dining at Islamabad Marriott Hotel" }
     ],
     "rooms": ["Deluxe King", "Executive King", "Executive Suite", "Royal Suite"],
-    "breakfast": "Demo answer: Breakfast begins at 8:00 AM and lasts until 11:00 AM. Make sure to be on time as late diners aren't entertained! Let me know if you'd like to inquire about the breakfast options available.",
-    "pool": "The hotel lists an indoor pool. Demo pool hours: 7:00 AM–10:00 PM.",
-    "womenPool": "Demo answer: The women's pool time begins at 3:00 PM and lasts until 6:00 PM on weekdays. Confirm the current schedule with the hotel.",
-    "menPool": "Demo men-only pool slot: 12:00 PM–2:00 PM. Confirm the current schedule with the hotel.",
-    "checkInOut": "Demo answer: Guests can check in at 10:00 AM and must check out before noon. Confirm current policies with the hotel.",
+    "breakfast": "Breakfast begins at 8:00 AM and lasts until 11:00 AM. Make sure to be on time as late diners aren't entertained! Let me know if you'd like to inquire about the breakfast options available.",
+    "pool": "The hotel lists an indoor pool. Pool hours: 7:00 AM–10:00 PM.",
+    "womenPool": "The women's pool time begins at 3:00 PM and lasts until 6:00 PM on weekdays. Confirm the current schedule with the hotel.",
+    "menPool": "Men-only pool slot: 12:00 PM–2:00 PM. Confirm the current schedule with the hotel.",
+    "checkInOut": "Guests can check in at 10:00 AM and must check out before noon. Confirm current policies with the hotel.",
     "source": "https://www.marriott.com/en-us/hotels/isbpk-islamabad-marriott-hotel/overview/",
     "photosSource": "https://www.marriott.com/en-us/hotels/isbpk-islamabad-marriott-hotel/photos/"
   },
@@ -35,11 +35,11 @@
       { "src": "https://image-tc.galaxy.tf/wijpeg-9n5wgkgzsk6n92kj7xq557ml0/maisha-pool.jpg?width=1400", "alt": "Maisha pool at Islamabad Serena Hotel" }
     ],
     "rooms": ["Deluxe Room", "Executive Room", "Junior Suite", "Executive Suite"],
-    "breakfast": "Demo answer: Breakfast begins at 8:00 AM and lasts until 11:00 AM. Make sure to be on time as late diners aren't entertained! Let me know if you'd like to inquire about the breakfast options available.",
-    "pool": "The hotel lists a rooftop pool. Demo pool hours: 7:00 AM–10:00 PM.",
-    "womenPool": "Demo answer: The women's pool time begins at 3:00 PM and lasts until 6:00 PM on weekdays. Confirm the current schedule with the hotel.",
-    "menPool": "Demo men-only pool slot: 11:00 AM–1:00 PM. Confirm the current schedule with the hotel.",
-    "checkInOut": "Demo answer: Guests can check in at 10:00 AM and must check out before noon. Confirm current policies with the hotel.",
+    "breakfast": "Breakfast begins at 8:00 AM and lasts until 11:00 AM. Make sure to be on time as late diners aren't entertained! Let me know if you'd like to inquire about the breakfast options available.",
+    "pool": "The hotel lists a rooftop pool. Pool hours: 7:00 AM–10:00 PM.",
+    "womenPool": "The women's pool time begins at 3:00 PM and lasts until 6:00 PM on weekdays. Confirm the current schedule with the hotel.",
+    "menPool": "Men-only pool slot: 11:00 AM–1:00 PM. Confirm the current schedule with the hotel.",
+    "checkInOut": "Guests can check in at 10:00 AM and must check out before noon. Confirm current policies with the hotel.",
     "source": "https://www.serenahotels.com/islamabad/",
     "photosSource": "https://www.serenahotels.com/islamabad/"
   },
@@ -57,11 +57,11 @@
       { "src": "https://www.pchotels.com/storage/media/2026/Aug/1wYVszXeLq4XuIN4gbtDEiaWUI8b3zDUNmpOZi1b.jpg", "alt": "Pool at Pearl-Continental Lahore" }
     ],
     "rooms": ["Standard King", "Deluxe King", "Executive King", "Business Suite"],
-    "breakfast": "Demo answer: Breakfast begins at 8:00 AM and lasts until 11:00 AM. Make sure to be on time as late diners aren't entertained! Let me know if you'd like to inquire about the breakfast options available.",
-    "pool": "The hotel lists a temperature-controlled outdoor pool. Demo pool hours: 7:00 AM–10:00 PM.",
-    "womenPool": "Demo answer: The women's pool time begins at 3:00 PM and lasts until 6:00 PM on weekdays. Confirm the current schedule with the hotel.",
-    "menPool": "Demo men-only pool slot: 10:00 AM–12:00 PM. Confirm the current schedule with the hotel.",
-    "checkInOut": "Demo answer: Guests can check in at 10:00 AM and must check out before noon. Confirm current policies with the hotel.",
+    "breakfast": "Breakfast begins at 8:00 AM and lasts until 11:00 AM. Make sure to be on time as late diners aren't entertained! Let me know if you'd like to inquire about the breakfast options available.",
+    "pool": "The hotel lists a temperature-controlled outdoor pool. Pool hours: 7:00 AM–10:00 PM.",
+    "womenPool": "The women's pool time begins at 3:00 PM and lasts until 6:00 PM on weekdays. Confirm the current schedule with the hotel.",
+    "menPool": "Men-only pool slot: 10:00 AM–12:00 PM. Confirm the current schedule with the hotel.",
+    "checkInOut": "Guests can check in at 10:00 AM and must check out before noon. Confirm current policies with the hotel.",
     "source": "https://pchotels.com/public/hotel-and-resort/pearl-continental-hotel-lahore",
     "photosSource": "https://pchotels.com/public/hotel-and-resort/pearl-continental-hotel-lahore"
   }

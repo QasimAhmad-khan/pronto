@@ -9,7 +9,7 @@ Open one of the three hotels from the landing page and type a question into that
 5. **When does breakfast start?**
 6. **What are check-in and check-out times?**
 7. **I need to book a room.**
-8. **I need fresh towels in my room.** The bot replies: `Request #3561 'fresh towels' has been made for Room #113!` and labels it as a demo request. It also publishes an alert to the separate phone's ntfy topic once paired.
+8. **I need fresh towels in my room.** The bot replies: `Fresh towels for Room #113. Request #3561.` It also publishes that alert to the saved phone topic.
 
 The scripted women's pool answer is **3:00 PM to 6:00 PM on weekdays**. The scripted breakfast answer is **8:00 AM to 11:00 AM**, including the reminder that late diners aren't entertained and an invitation to ask about breakfast options. The scripted check-in answer is **10:00 AM**, with check-out **before noon**. These are demo answers for all three hotels, not verified policies.
 

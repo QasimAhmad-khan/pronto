@@ -137,6 +137,10 @@ em { font-style:normal; font-family:Georgia,serif; font-weight:400; }
 .phone-pairing-content button { border:0; border-radius:100px; background:var(--blue); color:#fff; padding:7px 10px; font-size:10px; margin:0 5px 8px 0; }
 .phone-pairing-content button:disabled,.service-notice button:disabled { opacity:.48; cursor:default; }
 .phone-pairing-content small { display:block; color:#7487aa; font-size:9px; }
+.phone-topic-form { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:8px; }
+.phone-topic-form label { flex-basis:100%; font-weight:650; }
+.phone-topic-form input { flex:1 1 140px; min-width:0; padding:7px 8px; border:1px solid var(--line); border-radius:6px; background:white; }
+.phone-topic-form button { margin:0; }
 .phone-status { font-size:10px; line-height:1.45; color:#486aa9; margin:0 0 11px; }
 .chat-input-line { display:flex; align-items:center; gap:7px; }
 .chat-input-line input { min-width:0; flex:1; border:1px solid #d2dff4; border-radius:100px; outline:none; padding:11px 14px; font-size:12px; color:var(--ink); background:#fff; height:42px; }
